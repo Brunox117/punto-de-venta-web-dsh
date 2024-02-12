@@ -1,9 +1,9 @@
+import React, { useEffect, useRef, useState } from "react";
 import {
   Button,
   Checkbox,
   FormControl,
   Grid,
-  IconButton,
   InputLabel,
   ListItemText,
   MenuItem,
@@ -11,10 +11,18 @@ import {
   TextField,
 } from "@mui/material";
 import { FormLayout } from "../layout/FormLayout";
-import { useRef, useState } from "react";
-import { SaveOutlined, UploadOutlined } from "@mui/icons-material";
+import {
+  AddCircleOutlineOutlined,
+  DeleteOutline,
+  SaveOutlined,
+  UploadOutlined,
+} from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "../../hooks/useForm";
+import { setActiveProduct } from "../../store/slices/productSlice/productSlice";
+import { createNewProduct } from "../../store/slices/productSlice/thunks";
 
-const categories = [
+const productCategories = [
   "farmacia",
   "mascotas",
   "innovaciones",
@@ -24,9 +32,25 @@ const categories = [
   "bebidas",
   "hogar",
 ];
+
 export const ProductsForm = () => {
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const dispatch = useDispatch();
+  const { activeProduct } = useSelector((state) => state.product);
   const fileInputRef = useRef();
+
+  // Utilizar el hook useForm para manejar el estado del formulario
+  const {
+    name,
+    price,
+    imageUrl,
+    categories: formCategories,
+    onInputChange,
+    setFormState, // Agregar setFormState para actualizar el estado del formulario
+  } = useForm(activeProduct);
+
+  const [selectedCategories, setSelectedCategories] = useState(
+    formCategories || []
+  );
 
   const onFileInputChange = ({ target }) => {
     if (target.files === 0) return;
@@ -34,53 +58,73 @@ export const ProductsForm = () => {
     // dispatch(startUploadingFiles(target.files));
   };
 
+  const onCreateProduct = () => {
+    dispatch(createNewProduct());
+    setSelectedCategories([]);
+    setFormState(activeProduct);
+  };
+
+  useEffect(() => {
+    dispatch(
+      setActiveProduct({
+        name,
+        price,
+        imageUrl,
+        categories: selectedCategories,
+      })
+    );
+  }, [dispatch, name, price, imageUrl, selectedCategories]);
+
   const handleChange = (event) => {
     setSelectedCategories(event.target.value);
   };
+
   return (
     <FormLayout title="Crea un producto">
       <Grid container>
         <TextField
           type="text"
           variant="outlined"
-          // fullWidth
           placeholder="Ingrese un nombre"
           label="Nombre"
           sx={{ border: "none", mb: 1 }}
-          // name="title"
-          // value={title}
-          // onChange={onInputChange}
+          name="name"
+          value={name}
+          onChange={onInputChange}
         />
 
-          <TextField
-            id="outlined-number"
-            label="Precio"
-            type="number"
-            sx={{ border: "none", mb: 1, marginRight: 1 }}
-            InputLabelProps={{
-              shrink: true,
+        <TextField
+          id="outlined-number"
+          label="Precio"
+          type="number"
+          sx={{ border: "none", mb: 1, marginRight: 1 }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          name="price"
+          value={price}
+          onChange={onInputChange}
+        />
+        <Grid item>
+          <input
+            type="file"
+            multiple
+            onChange={onFileInputChange}
+            ref={fileInputRef}
+            style={{
+              display: "none",
             }}
           />
-          <input
-          type="file"
-          multiple
-          onChange={onFileInputChange}
-          ref={fileInputRef}
-          style={{
-            display: "none",
-          }}
-        />
-        <Button
-          // disabled={isSaving}
-          // onClick={onSaveNote}
-          color="secondary"
-          sx={{ padding: 2 }}
-          // onClick={() => fileInputRef.current.click()}
-        >
-          <UploadOutlined sx={{ fontSize: 30, mr: 1 }} />
-          Subir imagen
-        </Button>
-        <FormControl fullWidth>
+          <Button
+            color="primary"
+            sx={{ fontSize: 20, mr: 1 }}
+            onClick={() => fileInputRef.current.click()}
+          >
+            <UploadOutlined sx={{ fontSize: 30, mr: 1 }} />
+            Subir imagen
+          </Button>
+        </Grid>
+        <FormControl fullWidth sx={{ mt: 1 }}>
           <InputLabel id="categories-label">Categorías</InputLabel>
           <Select
             labelId="categories-label"
@@ -90,7 +134,7 @@ export const ProductsForm = () => {
             onChange={handleChange}
             renderValue={(selected) => selected.join(", ")}
           >
-            {categories.map((category) => (
+            {productCategories.map((category) => (
               <MenuItem key={category} value={category}>
                 <Checkbox checked={selectedCategories.indexOf(category) > -1} />
                 <ListItemText primary={category} />
@@ -98,15 +142,27 @@ export const ProductsForm = () => {
             ))}
           </Select>
         </FormControl>
-        <Button
-          // disabled={isSaving}
-          // onClick={onSaveNote}
-          color="secondary"
-          sx={{ padding: 2 }}
+        <Grid
+          container
+          sx={{ display: "flex", justifyContent: "space-between" }}
         >
-          <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
-          Guardar
-        </Button>
+          <Button color="secondary" sx={{ padding: 2 }}>
+            <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
+            Guardar
+          </Button>
+          <Button
+            onClick={onCreateProduct}
+            color="secondary"
+            sx={{ padding: 2 }}
+          >
+            <AddCircleOutlineOutlined sx={{ fontSize: 30, mr: 1 }} />
+            Nuevo
+          </Button>
+          <Button color="error" sx={{ padding: 2 }}>
+            <DeleteOutline sx={{ fontSize: 30, mr: 1 }} />
+            Borrar
+          </Button>
+        </Grid>
       </Grid>
     </FormLayout>
   );
