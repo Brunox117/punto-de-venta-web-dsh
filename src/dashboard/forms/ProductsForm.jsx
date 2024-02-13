@@ -20,7 +20,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../hooks/useForm";
 import { setActiveProduct } from "../../store/slices/productSlice/productSlice";
-import { createNewProduct } from "../../store/slices/productSlice/thunks";
+import {
+  createNewProduct,
+  startSaveProduct,
+} from "../../store/slices/productSlice/thunks";
 
 const productCategories = [
   "farmacia",
@@ -35,7 +38,7 @@ const productCategories = [
 
 export const ProductsForm = () => {
   const dispatch = useDispatch();
-  const { activeProduct } = useSelector((state) => state.product);
+  const { activeProduct, isSaving } = useSelector((state) => state.product);
   const fileInputRef = useRef();
 
   // Utilizar el hook useForm para manejar el estado del formulario
@@ -60,8 +63,8 @@ export const ProductsForm = () => {
 
   const onCreateProduct = () => {
     dispatch(createNewProduct());
-    setSelectedCategories([]);
     setFormState(activeProduct);
+    setSelectedCategories([]);
   };
 
   useEffect(() => {
@@ -74,6 +77,10 @@ export const ProductsForm = () => {
       })
     );
   }, [dispatch, name, price, imageUrl, selectedCategories]);
+
+  const onSaveProduct = () => {
+    dispatch(startSaveProduct());
+  };
 
   const handleChange = (event) => {
     setSelectedCategories(event.target.value);
@@ -116,6 +123,7 @@ export const ProductsForm = () => {
             }}
           />
           <Button
+            disabled={isSaving}
             color="primary"
             sx={{ fontSize: 20, mr: 1 }}
             onClick={() => fileInputRef.current.click()}
@@ -146,11 +154,17 @@ export const ProductsForm = () => {
           container
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
-          <Button color="secondary" sx={{ padding: 2 }}>
+          <Button
+            onClick={onSaveProduct}
+            disabled={isSaving}
+            color="secondary"
+            sx={{ padding: 2 }}
+          >
             <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
             Guardar
           </Button>
           <Button
+            disabled={isSaving}
             onClick={onCreateProduct}
             color="secondary"
             sx={{ padding: 2 }}
@@ -158,7 +172,7 @@ export const ProductsForm = () => {
             <AddCircleOutlineOutlined sx={{ fontSize: 30, mr: 1 }} />
             Nuevo
           </Button>
-          <Button color="error" sx={{ padding: 2 }}>
+          <Button disabled={isSaving} color="error" sx={{ padding: 2 }}>
             <DeleteOutline sx={{ fontSize: 30, mr: 1 }} />
             Borrar
           </Button>

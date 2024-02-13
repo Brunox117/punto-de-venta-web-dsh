@@ -29,8 +29,11 @@ export const useForm = (initialForm = {}, formValidations = {}) => {
     if (Object.keys(formValidations).length > 0) {
       const formCheckedValues = {};
       for (const formField of Object.keys(formValidations)) {
-        const [fn, errorMessage = "Error en el campo"] = formValidations[formField];
-        formCheckedValues[`${formField}Valid`] = fn(formState[formField]) ? null : errorMessage;
+        const [fn, errorMessage = "Error en el campo"] =
+          formValidations[formField];
+        formCheckedValues[`${formField}Valid`] = fn(formState[formField])
+          ? null
+          : errorMessage;
       }
       setFormState((prevFormState) => ({
         ...prevFormState,
@@ -42,5 +45,6 @@ export const useForm = (initialForm = {}, formValidations = {}) => {
   return {
     ...formState,
     onInputChange,
+    setFormState,
   };
 };
