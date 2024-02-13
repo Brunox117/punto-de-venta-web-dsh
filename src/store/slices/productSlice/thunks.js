@@ -1,5 +1,6 @@
 import { FirebaseDB } from "../../../firebase/config";
 import { fileUpload, imgDelete } from "../../../helpers";
+import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import {
   addNewEmptyProduct,
   deleteActiveProduct,
@@ -10,7 +11,6 @@ import {
   setPhotoToActiveProduct,
   setSaving,
 } from "./productSlice";
-import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 
 export const createNewProduct = () => {
   return async (dispatch) => {
