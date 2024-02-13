@@ -9,11 +9,11 @@ export const fileUpload = async (file) => {
   try {
     // Subir el archivo al almacenamiento de Firebase
     const snapshot = await uploadBytes(storageRef, file);
-    console.log("Archivo subido con éxito:", snapshot.totalBytes, "bytes");
+    // console.log("Archivo subido con éxito:", snapshot.totalBytes, "bytes");
 
     // Obtener la URL de descarga del archivo
     const downloadURL = await getDownloadURL(storageRef);
-    console.log("URL de descarga del archivo:", downloadURL);
+    //console.log("URL de descarga del archivo:", downloadURL);
 
     return downloadURL;
   } catch (error) {

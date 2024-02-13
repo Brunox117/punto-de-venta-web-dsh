@@ -60,11 +60,15 @@ export const categorySlice = createSlice({
     deleteActivecategory: (state) => {
       state.activeCategory = null;
     },
+    updateFormatedName: (state, action) => {
+      state.activeCategory.formatedName = action.payload;
+    }
   },
 });
 
 // Action creators are generated for each case reducer function
 export const {
+  updateFormatedName,
   addNewEmptycategory,
   categoryUpdated,
   clearcategoriesOnLogout,

@@ -19,6 +19,7 @@ export const createNewCategory = () => {
       id: "",
       name: "",
       imageUrl: "",
+      formatedName: "",
     };
     await dispatch(addNewEmptycategory(newCategory));
     dispatch(setActivecategory(newCategory));
