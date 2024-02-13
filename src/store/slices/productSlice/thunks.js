@@ -1,6 +1,5 @@
-import { ref, deleteObject } from "firebase/storage";
-import { FirebaseDB, FirebaseSTORAGE } from "../../../firebase/config";
-import { fileUpload } from "../../../helpers";
+import { FirebaseDB } from "../../../firebase/config";
+import { fileUpload, imgDelete } from "../../../helpers";
 import {
   addNewEmptyProduct,
   deleteActiveProduct,
@@ -52,7 +51,12 @@ export const startSaveProduct = () => {
 };
 
 export const startUploadingImg = (file) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const { activeProduct } = getState().product;
+    const imageUrl = activeProduct.imageUrl;
+    if (imageUrl !== "") {
+      await imgDelete(imageUrl);
+    }
     dispatch(setSaving());
     const imgUrl = await fileUpload(file);
     dispatch(setPhotoToActiveProduct(imgUrl));
@@ -63,13 +67,8 @@ export const startDeletingProduct = () => {
   return async (dispatch, getState) => {
     const { activeProduct } = getState().product;
     const imageUrl = activeProduct.imageUrl;
-    if (imageUrl) {
-      try {
-        const storageRef = ref(FirebaseSTORAGE, imageUrl);
-        await deleteObject(storageRef);
-      } catch (error) {
-        console.error("Error al borrar la imagen en Firebase Storage:", error);
-      }
+    if (imageUrl !== "") {
+      await imgDelete(imageUrl);
     }
     if (activeProduct.id === "") {
       dispatch(deleteActiveProduct());
