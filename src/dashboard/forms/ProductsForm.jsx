@@ -17,12 +17,16 @@ import {
   SaveOutlined,
   UploadOutlined,
 } from "@mui/icons-material";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../hooks/useForm";
 import { setActiveProduct } from "../../store/slices/productSlice/productSlice";
 import {
   createNewProduct,
+  startDeletingProduct,
   startSaveProduct,
+  startUploadingImg,
 } from "../../store/slices/productSlice/thunks";
 
 const productCategories = [
@@ -36,9 +40,28 @@ const productCategories = [
   "hogar",
 ];
 
+// Definir las validaciones
+const formValidations = {
+  name: [(value) => value.trim().length > 0, "El nombre es requerido"],
+  price: [
+    (value) => !isNaN(value) && parseFloat(value) >= 0,
+    "El precio debe ser un número positivo",
+  ],
+  imageUrl: [
+    (value) => value.trim().length > 0,
+    "La URL de la imagen es requerida",
+  ],
+  categories: [
+    (value) => value.length > 0,
+    "Debes seleccionar al menos una categoría",
+  ],
+};
+
 export const ProductsForm = () => {
   const dispatch = useDispatch();
-  const { activeProduct, isSaving } = useSelector((state) => state.product);
+  const { activeProduct, isSaving, messageSaved } = useSelector(
+    (state) => state.product
+  );
   const fileInputRef = useRef();
 
   // Utilizar el hook useForm para manejar el estado del formulario
@@ -46,10 +69,12 @@ export const ProductsForm = () => {
     name,
     price,
     imageUrl,
+    id,
     categories: formCategories,
     onInputChange,
     setFormState, // Agregar setFormState para actualizar el estado del formulario
-  } = useForm(activeProduct);
+    isFormValid, // Agregar isFormValid para determinar si el formulario es válido
+  } = useForm(activeProduct, formValidations); // Pasa formValidations aquí
 
   const [selectedCategories, setSelectedCategories] = useState(
     formCategories || []
@@ -58,7 +83,7 @@ export const ProductsForm = () => {
   const onFileInputChange = ({ target }) => {
     if (target.files === 0) return;
     console.log("subiendo: ", target.files);
-    // dispatch(startUploadingFiles(target.files));
+    dispatch(startUploadingImg(target.files[0]));
   };
 
   const onCreateProduct = () => {
@@ -74,9 +99,16 @@ export const ProductsForm = () => {
         price,
         imageUrl,
         categories: selectedCategories,
+        id,
       })
     );
   }, [dispatch, name, price, imageUrl, selectedCategories]);
+
+  useEffect(() => {
+    if (messageSaved.length > 0) {
+      Swal.fire("Producto actualizado/creado", messageSaved, "success");
+    }
+  }, [messageSaved]);
 
   const onSaveProduct = () => {
     dispatch(startSaveProduct());
@@ -84,6 +116,22 @@ export const ProductsForm = () => {
 
   const handleChange = (event) => {
     setSelectedCategories(event.target.value);
+  };
+
+  const onDelete = () => {
+    Swal.fire({
+      title: "Seguro que quieres borrar el producto!",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "SI",
+      denyButtonText: `NO`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(startDeletingProduct());
+      } else if (result.isDenied) {
+        return;
+      }
+    });
   };
 
   return (
@@ -156,7 +204,7 @@ export const ProductsForm = () => {
         >
           <Button
             onClick={onSaveProduct}
-            disabled={isSaving}
+            disabled={isSaving || !isFormValid} // Deshabilita el botón si el formulario no es válido
             color="secondary"
             sx={{ padding: 2 }}
           >
@@ -172,7 +220,9 @@ export const ProductsForm = () => {
             <AddCircleOutlineOutlined sx={{ fontSize: 30, mr: 1 }} />
             Nuevo
           </Button>
-          <Button disabled={isSaving} color="error" sx={{ padding: 2 }}>
+          <Button 
+          onClick={onDelete}
+          disabled={isSaving} color="error" sx={{ padding: 2 }}>
             <DeleteOutline sx={{ fontSize: 30, mr: 1 }} />
             Borrar
           </Button>

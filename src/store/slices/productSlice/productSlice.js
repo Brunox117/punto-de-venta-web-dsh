@@ -51,14 +51,17 @@ export const productSlice = createSlice({
         }
         return product;
       });
-      state.messageSaved = `${action.payload.title} actualizada correctamente`;
+      state.messageSaved = `:D`;
     },
     deleteProductById: (state, action) => {
-      state.active = null;
+      state.activeProduct = null;
       state.products = state.products.filter(
         (product) => product.id !== action.payload
       );
     },
+    deleteActiveProduct: (state) => {
+      state.activeProduct = null;
+    }
   },
 });
 
@@ -73,4 +76,5 @@ export const {
   setPhotoToActiveProduct,
   setProducts,
   setSaving,
+  deleteActiveProduct,
 } = productSlice.actions;

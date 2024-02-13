@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export const useForm = (initialForm = {}, formValidations = {}) => {
   const [formState, setFormState] = useState(initialForm);
+  const [isFormValid, setIsFormValid] = useState(false); // Nuevo estado para indicar si el formulario es válido
 
-  // Actualizar el estado del formulario cuando activeProduct cambie
   useEffect(() => {
     setFormState(initialForm);
   }, [initialForm]);
 
-  // Actualizar el estado de las categorías cuando activeProduct cambie
   useEffect(() => {
     setFormState((prevFormState) => ({
       ...prevFormState,
@@ -25,26 +24,23 @@ export const useForm = (initialForm = {}, formValidations = {}) => {
   };
 
   useEffect(() => {
+    let isValid = true; // Inicialmente asumimos que el formulario es válido
+
     // Si hay alguna validación, ejecutarla
     if (Object.keys(formValidations).length > 0) {
-      const formCheckedValues = {};
       for (const formField of Object.keys(formValidations)) {
-        const [fn, errorMessage = "Error en el campo"] =
-          formValidations[formField];
-        formCheckedValues[`${formField}Valid`] = fn(formState[formField])
-          ? null
-          : errorMessage;
+        const [fn] = formValidations[formField];
+        isValid = isValid && fn(formState[formField]); // Comprobamos si cada campo cumple su validación
       }
-      setFormState((prevFormState) => ({
-        ...prevFormState,
-        ...formCheckedValues,
-      }));
     }
+
+    setIsFormValid(isValid); // Actualizamos el estado de isFormValid
   }, [formState, formValidations]);
 
   return {
     ...formState,
     onInputChange,
     setFormState,
+    isFormValid, // Exportamos isFormValid junto con el estado del formulario
   };
 };

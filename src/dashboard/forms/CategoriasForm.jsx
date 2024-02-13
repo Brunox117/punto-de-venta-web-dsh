@@ -1,5 +1,5 @@
 export const CategoriasForm = () => {
   return (
-    <div>CategoriasForm</div>
+    <div>CPunto de Venta</div>
   )
 }
