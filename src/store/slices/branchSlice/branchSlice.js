@@ -18,55 +18,70 @@ export const branchSlice = createSlice({
     // }
     },
     reducers: {
-        savingNewProduct: (state) => {
+        savingNewBranch: (state) => {
             state.isSaving = true;
           },
-          addNewEmptyProduct: (state, action) => {
-            state.products.push(action.payload);
+          addNewEmptyBranch: (state, action) => {
+            state.branches.push(action.payload);
             state.isSaving = false;
           },
-          setActiveProduct: (state, action) => {
-            state.activeProduct = action.payload;
+          setActiveBranch: (state, action) => {
+            state.activeBranch = action.payload;
           },
-          setProducts: (state) => {
-            state.products = action.payload;
+          setbranches: (state) => {
+            state.branches = action.payload;
           },
           setSaving: (state) => {
             state.isSaving = true;
             state.messageSaved = "";
           },
-          setPhotoToActiveProduct: (state, action) => {
-            state.activeProduct.imageUrl = action.payload;
+          setPhotoToactiveBranch: (state, action) => {
+            state.activeBranch.imageUrl = action.payload;
             state.isSaving = false;
           },
-          clearProductsOnLogout: (state) => {
+          clearbranchesOnLogout: (state) => {
             state.isSaving = false,
             state.messageSaved = "",
-            state.products = [],
-            state.activeProduct = null;
+            state.branches = [],
+            state.activeBranch = null;
           },
-          productUpdated: (state, action) => {
+          branchUpdated: (state, action) => {
             state.isSaving = false;
-            state.products = state.products.map((product) => {
-              if (product.id === action.payload.id) {
+            state.branches = state.branches.map((branch) => {
+              if (branch.id === action.payload.id) {
                 return action.payload;
               }
-              return product;
+              return branch;
             });
             state.messageSaved = `:D`;
           },
-          deleteProductById: (state, action) => {
-            state.activeProduct = null;
-            state.products = state.products.filter(
-              (product) => product.id !== action.payload
+          deletebranchById: (state, action) => {
+            state.activeBranch = null;
+            state.branches = state.branches.filter(
+              (branch) => branch.id !== action.payload
             );
           },
-          deleteActiveProduct: (state) => {
-            state.activeProduct = null;
+          deleteactiveBranch: (state) => {
+            state.activeBranch = null;
+          },
+          clearMessage: (state) => {
+            state.messageSaved = '';
           }
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { increment } = branchSlice.actions;
+export const { 
+  addNewEmptyBranch,
+  branchUpdated,
+  clearbranchesOnLogout,
+  deleteactiveBranch,
+  deletebranchById,
+  savingNewBranch,
+  setActiveBranch,
+  setPhotoToactiveBranch,
+  setSaving,
+  setbranches,
+  clearMessage,
+ } = branchSlice.actions;

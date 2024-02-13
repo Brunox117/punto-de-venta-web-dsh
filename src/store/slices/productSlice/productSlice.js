@@ -61,6 +61,9 @@ export const productSlice = createSlice({
     },
     deleteActiveProduct: (state) => {
       state.activeProduct = null;
+    },
+    clearMessage: (state) => {
+      state.messageSaved = '';
     }
   },
 });
@@ -76,5 +79,6 @@ export const {
   setPhotoToActiveProduct,
   setProducts,
   setSaving,
+  clearMessage,
   deleteActiveProduct,
 } = productSlice.actions;

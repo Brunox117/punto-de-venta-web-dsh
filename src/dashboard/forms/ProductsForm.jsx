@@ -20,6 +20,7 @@ import {
   startDeletingProduct,
   startSaveProduct,
   startUploadingImg,
+  clearMessage,
 } from "../../store/slices/productSlice";
 import { ButtonsGrid, UploadButton } from "../components";
 
@@ -97,6 +98,7 @@ export const ProductsForm = () => {
     if (messageSaved.length > 0) {
       Swal.fire("Producto actualizado/creado", messageSaved, "success");
     }
+    dispatch(clearMessage());
   }, [messageSaved]);
   //CRUD DEL PRODUCT
   const onSaveProduct = () => {
