@@ -72,7 +72,7 @@ export const startDeletingProduct = () => {
       }
     }
     if (activeProduct.id === "") {
-      dispatch(deleteActiveProduct);
+      dispatch(deleteActiveProduct());
     } else {
       const docRef = doc(FirebaseDB, `products/${activeProduct.id}`);
       await deleteDoc(docRef);

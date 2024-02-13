@@ -1,1 +1,2 @@
-export * from "./counterSlice";
+export * from './categorySlice';
+export * from './productSlice';
