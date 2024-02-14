@@ -8,6 +8,5 @@ export const imgDelete = async (imageUrl) => {
     //console.log("Imagen borrada de Firebase Storage:", imageUrl);
   } catch (error) {
     console.error("Error al borrar la imagen en Firebase Storage:", error);
-    throw error; // Puedes decidir si quieres relanzar el error para manejarlo en el lugar donde se llama a esta función.
   }
 };

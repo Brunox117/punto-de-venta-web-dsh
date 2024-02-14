@@ -2,6 +2,7 @@ import { FirebaseDB } from "../../../firebase/config";
 import { fileUpload, imgDelete } from "../../../helpers";
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import {
+  addNewCategory,
   addNewEmptycategory,
   categoryUpdated,
   deleteActivecategory,
@@ -10,8 +11,9 @@ import {
   setActivecategory,
   setPhotoToActivecategory,
   setSaving,
+  setcategories,
 } from "./categorySlice";
-
+import { loadCategories } from "../../../helpers/firebaseDB/loadCategories";
 export const createNewCategory = () => {
   return async (dispatch) => {
     dispatch(savingNewcategory());
@@ -39,12 +41,12 @@ export const startSaveCategory = () => {
       console.log({ newDoc, setDocResp });
       console.log(`category creada con el id: ${categoryToFirestore.id}`);
       dispatch(setActivecategory(categoryToFirestore));
-      dispatch(categoryUpdated(categoryToFirestore.id));
+      dispatch(addNewCategory(categoryToFirestore));
     } else {
       delete categoryToFirestore.id;
       const docRef = doc(FirebaseDB, `categories/${activeCategory.id}`);
       await setDoc(docRef, categoryToFirestore, { merge: true });
-      dispatch(categoryUpdated(activeCategory.id));
+      dispatch(categoryUpdated(activeCategory));
     }
   };
 };
@@ -76,5 +78,33 @@ export const startDeletingCategory = () => {
       await deleteDoc(docRef);
       dispatch(deletecategoryById(activeCategory.id));
     }
+  };
+};
+
+export const startDeletingCategoryById = (category) => {
+  return async (dispatch, getState) => {
+    const { activeCategory } = getState().category;
+    if (activeCategory && activeCategory.id === category.id) {
+      dispatch(startDeletingCategory());
+    }
+    const imageUrl = category.imageUrl;
+    if (imageUrl !== "") {
+      await imgDelete(imageUrl);
+    }
+    if (category.id === "") {
+      console.log('Implementar logica')
+    } else {
+      const docRef = doc(FirebaseDB, `categories/${category.id}`);
+      await deleteDoc(docRef);
+      dispatch(deletecategoryById(category.id));
+    }
+  }
+}
+
+export const startLoadingCategories = () => {
+  return async (dispatch, getState) => {
+    //TODO verificar si ya hay categories cargadas
+    const categories = await loadCategories();
+    dispatch(setcategories(categories));
   };
 };

@@ -18,13 +18,13 @@ export const categorySlice = createSlice({
       state.isSaving = true;
     },
     addNewEmptycategory: (state, action) => {
-      state.categories.push(action.payload);
+      // state.categories.push(action.payload);
       state.isSaving = false;
     },
     setActivecategory: (state, action) => {
       state.activeCategory = action.payload;
     },
-    setcategories: (state) => {
+    setcategories: (state, action) => {
       state.categories = action.payload;
     },
     setSaving: (state) => {
@@ -51,6 +51,12 @@ export const categorySlice = createSlice({
       });
       state.messageSaved = `:D`;
     },
+    addNewCategory: (state, action) => {
+      console.log('action.payload: ', action.payload);
+      state.isSaving = false,
+      state.categories.push(action.payload);
+      state.messageSaved = `:D`;
+    },
     deletecategoryById: (state, action) => {
       state.activeCategory = null;
       state.categories = state.categories.filter(
@@ -68,6 +74,7 @@ export const categorySlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
+  addNewCategory,
   updateFormatedName,
   addNewEmptycategory,
   categoryUpdated,
