@@ -35,9 +35,9 @@ export const startSaveProduct = () => {
     //PREGUNTAR SI TIENE O NO ID SI NO TIENE SE LE DEBERIA ASIGNAR UN ID
     if (productToFirestore.id === "") {
       const newDoc = doc(collection(FirebaseDB, `products/`));
-      const setDocResp = await setDoc(newDoc, activeProduct);
-      console.log({ newDoc, setDocResp });
       productToFirestore.id = newDoc.id;
+      const setDocResp = await setDoc(newDoc, productToFirestore);
+      console.log({ newDoc, setDocResp });
       console.log(`producto creado con el id: ${productToFirestore.id}`);
       dispatch(setActiveProduct(productToFirestore));
       dispatch(productUpdated(productToFirestore.id));

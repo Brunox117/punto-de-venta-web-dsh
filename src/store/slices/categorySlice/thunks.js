@@ -34,15 +34,15 @@ export const startSaveCategory = () => {
     //PREGUNTAR SI TIENE O NO ID SI NO TIENE SE LE DEBERIA ASIGNAR UN ID
     if (categoryToFirestore.id === "") {
       const newDoc = doc(collection(FirebaseDB, `categories/`));
-      const setDocResp = await setDoc(newDoc, activeCategory);
-      console.log({ newDoc, setDocResp });
       categoryToFirestore.id = newDoc.id;
+      const setDocResp = await setDoc(newDoc, categoryToFirestore);
+      console.log({ newDoc, setDocResp });
       console.log(`category creada con el id: ${categoryToFirestore.id}`);
       dispatch(setActivecategory(categoryToFirestore));
       dispatch(categoryUpdated(categoryToFirestore.id));
     } else {
       delete categoryToFirestore.id;
-      const docRef = doc(FirebaseDB, `categorys/${activeCategory.id}`);
+      const docRef = doc(FirebaseDB, `categories/${activeCategory.id}`);
       await setDoc(docRef, categoryToFirestore, { merge: true });
       dispatch(categoryUpdated(activeCategory.id));
     }
@@ -72,7 +72,7 @@ export const startDeletingCategory = () => {
     if (activeCategory.id === "") {
       dispatch(deleteActivecategory());
     } else {
-      const docRef = doc(FirebaseDB, `products/${activeCategory.id}`);
+      const docRef = doc(FirebaseDB, `categories/${activeCategory.id}`);
       await deleteDoc(docRef);
       dispatch(deletecategoryById(activeCategory.id));
     }
