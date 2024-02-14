@@ -9,7 +9,9 @@ import { useCategories } from "../../hooks/firebaseDB/getFromFirebaseDB";
 export const CategoriasView = () => {
   const { activeCategory } = useSelector((state) => state.category);
   const dispatch = useDispatch();
-  useCategories();
+
+  useCategories(); //!!
+
   const onClick = () => {
     dispatch(createNewCategory());
   };

@@ -17,7 +17,7 @@ export const categorySlice = createSlice({
     savingNewcategory: (state) => {
       state.isSaving = true;
     },
-    addNewEmptycategory: (state, action) => {
+    addNewEmptycategory: (state) => {
       // state.categories.push(action.payload);
       state.isSaving = false;
     },

@@ -8,7 +8,7 @@ export const Categories = () => {
   const onEdit = (category) => {
     dispatch(setActivecategory(category));
   };
-  const onErease = (category) => {
+  const onDelete = (category) => {
     dispatch(startDeletingCategoryById(category))
   }
   return (
@@ -17,7 +17,7 @@ export const Categories = () => {
         <div key={category.id}>
           {category.name}
           <Button onClick={() => onEdit(category)}>Editar</Button>
-          <Button onClick={() => onErease(category)}>Borrar</Button>
+          <Button onClick={() => onDelete(category)}>Borrar</Button>
         </div>
       ))}
     </>

@@ -13,7 +13,7 @@ import {
   setSaving,
   setcategories,
 } from "./categorySlice";
-import { loadCategories } from "../../../helpers/firebaseDB/loadCategories";
+import { loadCategories } from "../../../helpers/firebaseDB/loadFromFirebase";
 export const createNewCategory = () => {
   return async (dispatch) => {
     dispatch(savingNewcategory());
@@ -92,7 +92,7 @@ export const startDeletingCategoryById = (category) => {
       await imgDelete(imageUrl);
     }
     if (category.id === "") {
-      console.log('Implementar logica')
+      //YA NO DEBERIA DE CUMPLIRSE ESTE IF NUNCA
     } else {
       const docRef = doc(FirebaseDB, `categories/${category.id}`);
       await deleteDoc(docRef);
@@ -102,8 +102,7 @@ export const startDeletingCategoryById = (category) => {
 }
 
 export const startLoadingCategories = () => {
-  return async (dispatch, getState) => {
-    //TODO verificar si ya hay categories cargadas
+  return async (dispatch) => {
     const categories = await loadCategories();
     dispatch(setcategories(categories));
   };
