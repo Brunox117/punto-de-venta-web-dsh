@@ -19,20 +19,20 @@ export const supplierSlice = createSlice({
             state.isSaving = true;
           },
           addNewEmptySupplier: (state, action) => {
-            state.suppliers.push(action.payload);
+            //state.suppliers.push(action.payload);
             state.isSaving = false;
           },
           setActiveSupplier: (state, action) => {
             state.activeSupplier = action.payload;
           },
-          setsuppliers: (state) => {
+          setSuppliers: (state, action) => {
             state.suppliers = action.payload;
           },
           setSaving: (state) => {
             state.isSaving = true;
             state.messageSaved = "";
           },
-          setPhotoToactiveSupplier: (state, action) => {
+          setPhotoToActiveSupplier: (state, action) => {
             state.activeSupplier.imageUrl = action.payload;
             state.isSaving = false;
           },
@@ -52,14 +52,23 @@ export const supplierSlice = createSlice({
             });
             state.messageSaved = `:D`;
           },
+          addNewSupplier: (state, action) => {
+            console.log('action.payload: ', action.payload);
+            state.isSaving = false,
+            state.suppliers.push(action.payload);
+            state.messageSaved = `:D`;
+          },
           deletesupplierById: (state, action) => {
             state.activeSupplier = null;
             state.suppliers = state.suppliers.filter(
               (supplier) => supplier.id !== action.payload
             );
           },
-          deleteactiveSupplier: (state) => {
+          deleteActiveSupplier: (state) => {
             state.activeSupplier = null;
+          },
+          updateFormatedName: (state, action) => {
+            state.activeCategory.formatedName = action.payload;
           },
           clearMessage: (state) => {
             state.messageSaved = '';
@@ -71,14 +80,15 @@ export const supplierSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { 
   addNewEmptySupplier,
+  addNewSupplier,
   supplierUpdated,
   clearsuppliersOnLogout,
-  deleteactiveSupplier,
+  deleteActiveSupplier,
   deletesupplierById,
   savingNewSupplier,
   setActiveSupplier,
-  setPhotoToactiveSupplier,
+  setPhotoToActiveSupplier,
   setSaving,
-  setsuppliers,
+  setSuppliers,
   clearMessage,
  } = supplierSlice.actions;

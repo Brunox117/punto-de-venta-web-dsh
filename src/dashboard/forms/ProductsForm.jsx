@@ -24,16 +24,11 @@ import {
 } from "../../store/slices/productSlice";
 import { ButtonsGrid, UploadButton } from "../components";
 
-const productCategories = [
-  "farmacia",
-  "mascotas",
-  "innovaciones",
-  "cremeria",
-  "maxima",
-  "abarrotes",
-  "bebidas",
-  "hogar",
-];
+// const productCategories = [
+//   "Bebidas",
+//   "Farmacia",
+//   "Mascotas",
+// ];
 
 const formValidations = {
   name: [(value) => value.trim().length > 0, "El nombre es requerido"],
@@ -53,10 +48,17 @@ const formValidations = {
 
 export const ProductsForm = () => {
   const dispatch = useDispatch();
+  const productCategories = []
   //SE OBTIENE LA INFORMACION QUE SE NECESITA DEL STORE
   const { activeProduct, isSaving, messageSaved } = useSelector(
     (state) => state.product
   );
+  const { categories } = useSelector(
+    (state) => state.category
+  );
+  categories.forEach(category => {
+    productCategories.push(category.name)
+  });
   // HOOK USEFORM MANEJA EL FORMULARIO
   const {
     name,

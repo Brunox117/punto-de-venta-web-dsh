@@ -3,14 +3,17 @@ import { fileUpload, imgDelete } from "../../../helpers";
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import {
   addNewEmptyProduct,
+  addNewProduct,
   deleteActiveProduct,
   deleteProductById,
   productUpdated,
   savingNewProduct,
   setActiveProduct,
   setPhotoToActiveProduct,
+  setProducts,
   setSaving,
 } from "./productSlice";
+import { loadProducts } from "../../../helpers/firebaseDB/loadFromFirebase";
 
 export const createNewProduct = () => {
   return async (dispatch) => {
@@ -38,14 +41,14 @@ export const startSaveProduct = () => {
       productToFirestore.id = newDoc.id;
       const setDocResp = await setDoc(newDoc, productToFirestore);
       console.log({ newDoc, setDocResp });
-      console.log(`producto creado con el id: ${productToFirestore.id}`);
+      console.log(`producto creado con el id: ${productToFirestore}`);
       dispatch(setActiveProduct(productToFirestore));
-      dispatch(productUpdated(productToFirestore.id));
+      dispatch(addNewProduct(productToFirestore));
     } else {
       delete productToFirestore.id;
       const docRef = doc(FirebaseDB, `products/${activeProduct.id}`);
       await setDoc(docRef, productToFirestore, { merge: true });
-      dispatch(productUpdated(activeProduct.id));
+      dispatch(productUpdated(activeProduct));
     }
   };
 };
@@ -77,5 +80,31 @@ export const startDeletingProduct = () => {
       await deleteDoc(docRef);
       dispatch(deleteProductById(activeProduct.id));
     }
+  };
+};
+
+export const startDeletingProductById = (product) => {
+  return async (dispacth, getState) => {
+    const { activeProduct } = getState().product;
+    if (activeProduct && activeProduct.id === product.id) {
+      dispacth(startDeletingProduct());
+    }
+    const imageUrl = product.imageUrl;
+    if (imageUrl !== "") {
+      await imgDelete(imageUrl);
+    }
+    if (product.id === "") {
+    } else {
+      const docRef = doc(FirebaseDB, `products/${product.id}`);
+      await deleteDoc(docRef);
+      dispacth(deleteProductById(product.id));
+    }
+  };
+};
+
+export const startLoadingProducts = () => {
+  return async (dispatch) => {
+    const products = await loadProducts();
+    dispatch(setProducts(products));
   };
 };
