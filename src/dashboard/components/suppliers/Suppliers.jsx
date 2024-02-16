@@ -1,10 +1,9 @@
-import { Box, Button, Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveSupplier } from "../../../store/slices/supplierSlice/supplierSlice";
 import { startDeletingSupplierById } from "../../../store/slices/supplierSlice/thunks";
-import { Carousel } from "react-responsive-carousel";
 import { Supplier } from "./Supplier";
 import Slider from "react-slick";
 export const Suppliers = () => {

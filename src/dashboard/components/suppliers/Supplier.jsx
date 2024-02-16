@@ -9,7 +9,8 @@ import {
 export const Supplier = ({ supplier }) => {
   // Función para abrir el enlace en una nueva ventana
   const openLinkInNewTab = (url) => {
-    window.open(url, "_blank");
+    const fullUrl = url.startsWith('http://') || url.startsWith('https://') ? url : 'https://' + url;
+    window.open(fullUrl, "_blank");
   };
 
   return (
@@ -33,4 +34,3 @@ export const Supplier = ({ supplier }) => {
     </Grid>
   );
 };
-
