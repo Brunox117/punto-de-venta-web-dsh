@@ -1,6 +1,6 @@
 import { Card, CardContent, CardMedia, Typography, Grid, Button } from "@mui/material";
 
-export const Category = ({ onEdit, onDelete }) => {
+export const Category = ({ category, onEdit, onDelete }) => {
   const { name, imageUrl } = category;
 
   return (
