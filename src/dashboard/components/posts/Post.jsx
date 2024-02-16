@@ -14,9 +14,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 
-export const Post = ({post}) => {
+export const Post = ({post, onDelete, onEdit}) => {
   return (
     <Card sx={{ maxWidth: '100%', mt: 5}}
     >
@@ -54,6 +54,10 @@ export const Post = ({post}) => {
     </Grid>
   </Grid>
 </CardActions>
+<Grid container justifyContent="space-between" sx={{ padding: 2 }}>
+        <Button variant="contained" style={{ borderRadius: 20, backgroundColor: '#f77e0a', color: '#fff', marginTop: 10 }} onClick={() => onEdit(post)}>Editar</Button>
+        <Button variant="contained" style={{ borderRadius: 20, backgroundColor: '#f77e0a', color: '#fff', marginTop: 10 }} onClick={() => onDelete(post)}>Borrar</Button>
+      </Grid>
     </Card>
   );
 }

@@ -22,7 +22,7 @@ export const postSlice = createSlice({
       state.isSaving = true;
     },
     addNewEmptypost: (state) => {
-      // state.categories.push(action.payload);
+      // state.post.push(action.payload);
       state.isSaving = false;
     },
     setActivepost: (state, action) => {
@@ -39,15 +39,15 @@ export const postSlice = createSlice({
       state.activePost.imageUrl = action.payload;
       state.isSaving = false;
     },
-    clearcategoriesOnLogout: (state) => {
+    clearpostOnLogout: (state) => {
       (state.isSaving = false),
         (state.messageSaved = ""),
-        (state.categories = []),
+        (state.posts = []),
         (state.activePost = null);
     },
     postUpdated: (state, action) => {
       state.isSaving = false;
-      state.categories = state.categories.map((post) => {
+      state.posts = state.posts.map((post) => {
         if (post.id === action.payload.id) {
           return action.payload;
         }
@@ -58,12 +58,12 @@ export const postSlice = createSlice({
     addNewPost: (state, action) => {
       console.log('action.payload: ', action.payload);
       state.isSaving = false,
-      state.categories.push(action.payload);
+      state.posts.push(action.payload);
       state.messageSaved = `:D`;
     },
     deletepostById: (state, action) => {
       state.activePost = null;
-      state.categories = state.categories.filter(
+      state.posts = state.posts.filter(
         (post) => post.id !== action.payload
       );
     },
@@ -90,7 +90,7 @@ export const {
   updateFormatedName,
   addNewEmptypost,
   postUpdated,
-  clearcategoriesOnLogout,
+  clearpostOnLogout,
   setActivePost,
   deleteActivepost,
   deletepostById,
@@ -98,5 +98,4 @@ export const {
   setActivepost,
   setPhotoToActivepost,
   setSaving,
-  setcategories,
 } = postSlice.actions;

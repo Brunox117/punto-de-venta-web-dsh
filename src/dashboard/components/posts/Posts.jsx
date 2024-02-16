@@ -16,13 +16,13 @@ export const Posts = () => {
     dispatch(startDeletingPostById(post));
   };
   return (
-      <Grid container >
+      <>
         {posts.map((post) => (
           <Grid item key={post.id}>
             <Post post={post} onEdit={onEdit} onDelete={onDelete} />
           </Grid>
         ))}
         
-      </Grid>
+      </>
   );
 };

@@ -40,6 +40,18 @@ export const Categories = () => {
       return 1; // Para pantallas pequeñas, muestra 1 slide
     }
   };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: calculateSlidesToShow(), // Llama a una función para calcular el número de slides a mostrar
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 4000,
+    cssEase: "linear",
+    swipeToSlide: true,
+  };
   return (
       <Grid container justifyContent="center" sx={{
         padding: {

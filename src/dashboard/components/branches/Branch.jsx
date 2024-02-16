@@ -50,8 +50,8 @@ export const Branch = ({branch, onEdit, onDelete}) => {
         </Grid>
       </CardContent>
       <Grid container justifyContent="space-between" sx={{ padding: 2 }}>
-          <Button variant="contained" style={{ borderRadius: 20, backgroundColor: '#f77e0a', color: '#fff', marginTop: 10 }} onClick={() => onEdit(product)}>Editar</Button>
-          <Button variant="contained" style={{ borderRadius: 20, backgroundColor: '#f77e0a', color: '#fff', marginTop: 10 }} onClick={() => onDelete(product)}>Borrar</Button>
+          <Button variant="contained" style={{ borderRadius: 20, backgroundColor: '#f77e0a', color: '#fff', marginTop: 10 }} onClick={() => onEdit(branch)}>Editar</Button>
+          <Button variant="contained" style={{ borderRadius: 20, backgroundColor: '#f77e0a', color: '#fff', marginTop: 10 }} onClick={() => onDelete(branch)}>Borrar</Button>
           </Grid>
     </Card>
   );
