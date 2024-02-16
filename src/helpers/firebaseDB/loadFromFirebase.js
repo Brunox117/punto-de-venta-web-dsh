@@ -46,3 +46,12 @@ export const loadPosts = async () => {
   });
   return posts;
 };
+export const loadBanners = async () => {
+  const collectionRef = collection(FirebaseDB, "/banners/");
+  const docs = await getDocs(collectionRef);
+  const banners = [];
+  docs.forEach((banner) => {
+    banners.push({ id: banner.id, ...banner.data() });
+  });
+  return banners;
+};

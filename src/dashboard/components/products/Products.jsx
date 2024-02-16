@@ -3,7 +3,7 @@ import {
   setActiveProduct,
   startDeletingProductById,
 } from "../../../store/slices/productSlice";
-import { Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Product } from "./Product";
 
 export const Products = () => {

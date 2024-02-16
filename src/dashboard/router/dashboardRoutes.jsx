@@ -1,12 +1,19 @@
 import { Route, Routes } from "react-router-dom";
 import {
   AbarroTipsView,
+  BannersView,
   CategoriasView,
   ProductosView,
   ProveedoresView,
   SucursalesView,
 } from "../views";
-import { useBranches, useCategories, usePosts, useProducts, useSuppliers } from "../../hooks/firebaseDB/getFromFirebaseDB";
+import {
+  useBranches,
+  useCategories,
+  usePosts,
+  useProducts,
+  useSuppliers,
+} from "../../hooks/firebaseDB/getFromFirebaseDB";
 
 export const DashboardRoutes = () => {
   useSuppliers();
@@ -22,6 +29,8 @@ export const DashboardRoutes = () => {
       <Route path="/abarrotips" element={<AbarroTipsView />} />
       <Route path="/proveedores" element={<ProveedoresView />} />
       <Route path="/categorías" element={<CategoriasView />} />
+      <Route path="/categorías" element={<CategoriasView />} />
+      <Route path="/banners" element={<BannersView />} />
     </Routes>
   );
 };
