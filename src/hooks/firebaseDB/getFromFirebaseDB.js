@@ -4,6 +4,7 @@ import { startLoadingCategories } from "../../store/slices/categorySlice/thunks"
 import { startLoadingSuppliers } from "../../store/slices/supplierSlice/thunks";
 import { startLoadingProducts } from "../../store/slices/productSlice";
 import { startLoadingBranches } from "../../store/slices/branchSlice";
+import { startLoadingPosts } from "../../store/slices/postSlice";
 
 export const useCategories = () => {
   const dispatch = useDispatch();
@@ -30,5 +31,12 @@ export const useBranches = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(startLoadingBranches());
+  }, []);
+};
+
+export const usePosts = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(startLoadingPosts());
   }, []);
 };

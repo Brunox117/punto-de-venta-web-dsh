@@ -37,3 +37,12 @@ export const loadSuppliers = async () => {
   });
   return suppliers;
 };
+export const loadPosts = async () => {
+  const collectionRef = collection(FirebaseDB, "/posts/");
+  const docs = await getDocs(collectionRef);
+  const posts = [];
+  docs.forEach((post) => {
+    posts.push({ id: post.id, ...post.data() });
+  });
+  return posts;
+};

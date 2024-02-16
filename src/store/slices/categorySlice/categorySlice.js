@@ -68,6 +68,9 @@ export const categorySlice = createSlice({
     },
     updateFormatedName: (state, action) => {
       state.activeCategory.formatedName = action.payload;
+    },
+    setActiveCategory: (state, action) => {
+      state.activeCategory = action.payload;
     }
   },
 });
@@ -79,6 +82,7 @@ export const {
   addNewEmptycategory,
   categoryUpdated,
   clearcategoriesOnLogout,
+  setActiveCategory,
   deleteActivecategory,
   deletecategoryById,
   savingNewcategory,

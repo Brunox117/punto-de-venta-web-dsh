@@ -6,13 +6,14 @@ import {
   ProveedoresView,
   SucursalesView,
 } from "../views";
-import { useBranches, useCategories, useProducts, useSuppliers } from "../../hooks/firebaseDB/getFromFirebaseDB";
+import { useBranches, useCategories, usePosts, useProducts, useSuppliers } from "../../hooks/firebaseDB/getFromFirebaseDB";
 
 export const DashboardRoutes = () => {
   useSuppliers();
   useCategories();
   useBranches();
   useProducts();
+  usePosts();
   return (
     <Routes>
       <Route path="/" element={<ProductosView />} />

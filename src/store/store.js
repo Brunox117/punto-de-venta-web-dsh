@@ -3,6 +3,7 @@ import { productSlice } from "./slices/productSlice/productSlice";
 import { branchSlice } from "./slices/branchSlice/branchSlice";
 import { categorySlice } from "./slices/categorySlice/categorySlice";
 import { supplierSlice } from "./slices/supplierSlice";
+import { postSlice } from "./slices/postSlice/postSlice";
 
 
 export const store = configureStore({
@@ -11,5 +12,6 @@ export const store = configureStore({
     branch: branchSlice.reducer,
     category: categorySlice.reducer,
     supplier: supplierSlice.reducer,
+    post: postSlice.reducer,
   },
 });

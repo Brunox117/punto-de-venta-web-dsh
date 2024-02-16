@@ -1,0 +1,17 @@
+/* Estilos para el componente Supplier en el centerMode */
+.supplier-centered {
+    transition: transform 0.5s ease-in-out !important; /* Agrega una transición suave */
+  }
+  
+  .supplier-centered.centered {
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño del componente seleccionado */
+  }
+  
+  .supplier-centered:hover {
+    transform: scale(1.05); /* Reduce ligeramente el tamaño al hacer hover */
+  }
+  
+  .supplier-card {
+    margin: 10px 10px 10px 10px !important; /* Agrega márgenes a los lados de cada tarjeta */
+  }
+  
