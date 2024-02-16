@@ -97,7 +97,7 @@ export const startDeletingBranchById = (branch) => {
     if (branch.id === "") {
       //YA NO DEBERIA DE CUMPLIRSE ESTE IF NUNCA
     } else {
-      const docRef = doc(FirebaseDB, `branches/${branch.id}S`);
+      const docRef = doc(FirebaseDB, `branches/${branch.id}`);
       await deleteDoc(docRef);
       dispatch(deletebranchById(branch.id));
     }

@@ -92,9 +92,8 @@ export const startDeletingSupplierById = (supplier) => {
       await imgDelete(imageUrl);
     }
     if (supplier.id === "") {
-      //YA NO DEBERIA DE CUMPLIRSE ESTE IF NUNCA
     } else {
-      const docRef = doc(FirebaseDB, `suppliers/${supplier.id}S`);
+      const docRef = doc(FirebaseDB, `suppliers/${supplier.id}`);
       await deleteDoc(docRef);
       dispatch(deletesupplierById(supplier.id));
     }

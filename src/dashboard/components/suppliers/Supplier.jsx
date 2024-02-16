@@ -4,6 +4,7 @@ import {
   CardMedia,
   Typography,
   Grid,
+  Button,
 } from "@mui/material";
 
 export const Supplier = ({ supplier }) => {
@@ -16,19 +17,24 @@ export const Supplier = ({ supplier }) => {
   return (
     <Grid container justifyContent="center" alignItems="center">
       <Card style={{ border: "none", boxShadow: "none" }}>
-        <div style={{ cursor: "pointer" }} onClick={() => openLinkInNewTab(supplier.siteLink)}>
-          <CardMedia 
-            sx={{ height: 150, width: 300}} 
-            image={supplier.imageUrl} 
-            title={supplier.name} 
-            component="img"
-            onDragStart={(e) => e.stopPropagation()}
-          />
-        </div>
-        <CardContent>
+        <CardMedia 
+          sx={{ height: 150, width: 300}} 
+          image={supplier.imageUrl} 
+          title={supplier.name} 
+          component="img"
+        />
+        <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Typography gutterBottom variant="h5" component="div" align="center">
             {supplier.name}
           </Typography>
+          <Button
+            variant="outlined"
+            color="success"
+            onClick={() => openLinkInNewTab(supplier.siteLink)}
+            sx={{ borderRadius: 20, width: '40%' }}
+          >
+            VISITANOS
+          </Button>
         </CardContent>
       </Card>
     </Grid>

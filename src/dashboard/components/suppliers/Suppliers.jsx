@@ -29,11 +29,16 @@ export const Suppliers = () => {
     <>
     <Slider {...settings}>
     {suppliers.map((supplier) => (
-      <Grid item key={supplier.id}>
-        <Supplier  supplier={supplier} />
-          <Button onClick={() => onDelete(supplier)}>Borrar</Button>
-          <Button onClick={() => onEdit(supplier)}>Editar</Button>
+      <Grid key={supplier.id} container justifyContent='center' spacing={2}>
+      <Grid item >
+        <Supplier supplier={supplier} />
       </Grid>
+      <Grid item>
+        <Button onClick={() => onEdit(supplier)}>Editar</Button>
+        <Button onClick={() => onDelete(supplier)}>Borrar</Button>
+      </Grid>
+    </Grid>
+    
       ))}
       </Slider>
     </>

@@ -59,7 +59,6 @@ export const supplierSlice = createSlice({
             state.messageSaved = `:D`;
           },
           deletesupplierById: (state, action) => {
-            state.activeSupplier = null;
             state.suppliers = state.suppliers.filter(
               (supplier) => supplier.id !== action.payload
             );
