@@ -8,6 +8,7 @@ import {
   SucursalesView,
 } from "../views";
 import {
+  useBanners,
   useBranches,
   useCategories,
   usePosts,
@@ -21,6 +22,7 @@ export const DashboardRoutes = () => {
   useBranches();
   useProducts();
   usePosts();
+  useBanners();
   return (
     <Routes>
       <Route path="/" element={<ProductosView />} />

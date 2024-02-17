@@ -12,12 +12,13 @@ import {
     bannerUpdated,
     addNewBanner,
 } from "./bannerSlice";
+import { loadBanners } from "../../../helpers/firebaseDB/loadFromFirebase";
 
 export const createNewBanner = () => {
   return async (dispatch) => {
     dispatch(savingNewBanner());
     const newBanner = {
-      name: "",
+      redirectUrl: "",
       imageUrl: "",
       id: "",
     };

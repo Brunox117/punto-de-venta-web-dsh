@@ -3,6 +3,7 @@ import { red } from "@mui/material/colors";
 
 export const theme = createTheme({
   palette: {
+    // mode: 'dark',
     primary: {
       main: "#bfeb00",
       opacity80: "rgba(191, 235, 0, 0.8)",
