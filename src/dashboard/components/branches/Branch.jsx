@@ -9,7 +9,7 @@ export const Branch = ({branch, onEdit, onDelete}) => {
     window.open(fullUrl, "_blank");
   };
   return (
-    <Card sx={{ maxWidth: 400, backgroundColor: '#f7f7f7' }}>
+    <Card sx={{ maxWidth: 400, backgroundColor: '#f7f7f7', margin: '3px'}}>
       <CardMedia
         component="img"
         height="180"

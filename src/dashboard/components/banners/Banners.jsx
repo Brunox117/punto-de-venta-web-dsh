@@ -3,7 +3,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Card, CardMedia, Grid } from "@mui/material";
-import { Banner } from "./Banner";
 import { startDeletingBannerById } from "../../../store/slices/bannerSlice/thunks";
 import { setActiveBanner } from "../../../store/slices/bannerSlice/bannerSlice";
 export const Banners = () => {
@@ -16,16 +15,14 @@ export const Banners = () => {
     dispatch(startDeletingBannerById(banner))
   }
   const settings = {
-    className: "slider variable-width",
     infinite: true,
-    centerMode: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    variableWidth: true,
+    swipeToSlide: true,
     autoplay: true,
     speed: 2000,
-    autoplaySpeed: 2000,
-    cssEase: "linear",
+    autoplaySpeed: 6000,
+    cssEase: "linear"
   };
   return (
     <div className="slider-container">
