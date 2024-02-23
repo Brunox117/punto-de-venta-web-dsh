@@ -2,15 +2,15 @@ import { FirebaseDB } from "../../../firebase/config";
 import { fileUpload, imgDelete } from "../../../helpers";
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import {
+    addNewBanner,
+    bannerUpdated,
   addNewEmptyBanner,
-  savingNewBanner,
-  setActiveBanner,
-  setPhotoToActiveBanner,
-  setBanners,
   deleteActiveBanner,
   deleteBannerById,
-    bannerUpdated,
-    addNewBanner,
+  savingNewBanner,
+  setActiveBanner,
+  setBanners,
+  setPhotoToActiveBanner,
 } from "./bannerSlice";
 import { loadBanners } from "../../../helpers/firebaseDB/loadFromFirebase";
 

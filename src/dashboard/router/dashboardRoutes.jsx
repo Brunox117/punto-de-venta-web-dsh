@@ -4,6 +4,7 @@ import {
   BannersView,
   CategoriasView,
   ProductosView,
+  PromocionesView,
   ProveedoresView,
   SucursalesView,
 } from "../views";
@@ -13,6 +14,7 @@ import {
   useCategories,
   usePosts,
   useProducts,
+  usePromos,
   useSuppliers,
 } from "../../hooks/firebaseDB/getFromFirebaseDB";
 
@@ -23,6 +25,7 @@ export const DashboardRoutes = () => {
   useProducts();
   usePosts();
   useBanners();
+  usePromos();
   return (
     <Routes>
       <Route path="/" element={<ProductosView />} />
@@ -33,6 +36,7 @@ export const DashboardRoutes = () => {
       <Route path="/categorías" element={<CategoriasView />} />
       <Route path="/categorías" element={<CategoriasView />} />
       <Route path="/banners" element={<BannersView />} />
+      <Route path="/promociones" element={<PromocionesView />} />
     </Routes>
   );
 };

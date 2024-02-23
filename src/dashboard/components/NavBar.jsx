@@ -11,7 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const routes = ["productos", "sucursales", "abarrotips", "proveedores", "categorías", "banners"];
+const routes = ["productos", "sucursales", "abarrotips", "proveedores", "categorías", "banners", "promociones"];
 
 export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);

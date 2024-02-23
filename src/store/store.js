@@ -5,6 +5,7 @@ import { categorySlice } from "./slices/categorySlice/categorySlice";
 import { supplierSlice } from "./slices/supplierSlice";
 import { postSlice } from "./slices/postSlice/postSlice";
 import { bannerSlice } from "./slices/bannerSlice/bannerSlice";
+import { promoSlice } from "./slices/promoSlice/promoSlice";
 
 
 export const store = configureStore({
@@ -15,5 +16,6 @@ export const store = configureStore({
     supplier: supplierSlice.reducer,
     post: postSlice.reducer,
     banner: bannerSlice.reducer,
+    promo: promoSlice.reducer,
   },
 });

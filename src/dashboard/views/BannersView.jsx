@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import { createNewBanner } from "../../store/slices/bannerSlice/thunks";
 import { Banner, Banners } from "../components/banners";
 import { CreateBox } from "../components";
@@ -14,13 +14,14 @@ export const BannersView = () => {
     <>
       {!!activeBanner ? (
         <>
-        <BannersForm />
-        <Banner />
+          <BannersForm />
+          {/* <Banner /> */}
         </>
       ) : (
         <CreateBox title="Crear banner" onClick={onClick} />
       )}
+      <br />
       <Banners/>
     </>
-  )
-}
+  );
+};

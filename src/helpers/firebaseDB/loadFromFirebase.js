@@ -55,3 +55,12 @@ export const loadBanners = async () => {
   });
   return banners;
 };
+export const loadPromos = async () => {
+  const collectionRef = collection(FirebaseDB, "/promos/");
+  const docs = await getDocs(collectionRef);
+  const promos = [];
+  docs.forEach((promo) => {
+    promos.push({ id: promo.id, ...promo.data() });
+  });
+  return promos;
+};
