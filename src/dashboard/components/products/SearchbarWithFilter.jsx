@@ -1,21 +1,16 @@
-// SearchbarWithFilter.jsx
 import React, { useState } from "react";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import SearchBar from "material-ui-search-bar";
-import { makeStyles } from "@material-ui/core/styles";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    alignItems: "center",
-  },
-  searchInput: {
-    maxWidth: 320,
-    marginRight: theme.spacing(2),
-  },
-}));
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
+import { Clear } from "@mui/icons-material";
 
 export const SearchbarWithFilter = ({ searchProducts, categories }) => {
-  const classes = useStyles();
   const [searchValue, setSearchValue] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
 
@@ -30,16 +25,30 @@ export const SearchbarWithFilter = ({ searchProducts, categories }) => {
     searchProducts(searchValue, category);
   };
 
+  const handleClearSearch = () => {
+    setSearchValue("");
+    searchProducts("", selectedCategory);
+  };
+
   return (
-    <div className={classes.root}>
-      <div className={classes.searchInput}>
-        <SearchBar
-          onCancelSearch={() => handleSearchChange("")}
-          placeholder="Buscar por nombre"
-          value={searchValue}
-          onChange={handleSearchChange}
-        />
-      </div>
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <TextField
+        variant="outlined"
+        placeholder="Buscar por nombre"
+        value={searchValue}
+        onChange={(e) => handleSearchChange(e.target.value)}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              {searchValue && (
+                <IconButton onClick={handleClearSearch}>
+                  <Clear />
+                </IconButton>
+              )}
+            </InputAdornment>
+          ),
+        }}
+      />
       <FormControl variant="outlined">
         <InputLabel id="category-label">Filtrar por categoría</InputLabel>
         <Select
