@@ -6,9 +6,9 @@ import {
 import { Grid } from "@mui/material";
 import { Product } from "./Product";
 
-export const Products = () => {
+export const Products = ({products}) => {
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.product);
+  // const { products } = useSelector((state) => state.product);
   const onEdit = (product) => {
     dispatch(setActiveProduct(product));
   };
