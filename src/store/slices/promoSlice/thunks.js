@@ -59,13 +59,13 @@ export const startUploadingImg = (file, imgNumber) => {
     const imageUrl1 = activePromo.imageUrl1;
     const imageUrl2 = activePromo.imageUrl2;
     const imageUrlG = activePromo.imageUrlG;
-    if (imageUrl1 !== "") {
+    if (imageUrl1 !== "" && imgNumber === 1) {
       await imgDelete(imageUrl1);
     }
-    if (imageUrl2 !== "") {
+    if (imageUrl2 !== "" && imgNumber === 2) {
       await imgDelete(imageUrl2);
     }
-    if (imageUrlG !== "") {
+    if (imageUrlG !== "" && imgNumber === 3) {
       await imgDelete(imageUrlG);
     }
     dispatch(savingNewPromo());
