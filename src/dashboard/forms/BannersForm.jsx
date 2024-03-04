@@ -30,7 +30,7 @@ export const BannersForm = () => {
   
   const onFileInputChange = ({ target }) => {
     if (target.files === 0) return;
-    console.log("subiendo: ", target.files[0]);
+    // console.log("subiendo: ", target.files[0]);
     dispatch(startUploadingImg(target.files[0]));
   };
 

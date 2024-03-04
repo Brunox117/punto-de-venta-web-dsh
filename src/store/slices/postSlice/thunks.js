@@ -44,8 +44,8 @@ export const startSavePost = () => {
             const newDoc = doc(collection(FirebaseDB, `posts/`));
             postToFirestore.id = newDoc.id;
             const setDocResp = await setDoc(newDoc, postToFirestore);
-            console.log({ newDoc, setDocResp });
-            console.log(`post creada con el id: ${postToFirestore.id}`);
+            // console.log({ newDoc, setDocResp });
+            // console.log(`post creada con el id: ${postToFirestore.id}`);
             dispatch(setActivepost(postToFirestore));
             dispatch(addNewPost(postToFirestore));
           } else {

@@ -53,7 +53,7 @@ export const supplierSlice = createSlice({
             state.messageSaved = `:D`;
           },
           addNewSupplier: (state, action) => {
-            console.log('action.payload: ', action.payload);
+            // console.log('action.payload: ', action.payload);
             state.isSaving = false,
             state.suppliers.push(action.payload);
             state.messageSaved = `:D`;

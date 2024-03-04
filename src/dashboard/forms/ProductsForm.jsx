@@ -92,7 +92,7 @@ export const ProductsForm = () => {
   //SE USA PARA OBTENER LA IMG Y SUBIRLA A A LA DB
   const onFileInputChange = ({ target }) => {
     if (target.files === 0) return;
-    console.log("subiendo: ", target.files);
+    // console.log("subiendo: ", target.files);
     dispatch(startUploadingImg(target.files[0]));
   };
   //CONFIRMACION DE GUARDAR

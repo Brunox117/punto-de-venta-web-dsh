@@ -37,8 +37,8 @@ export const startSaveBanner = () => {
       const newDoc = doc(collection(FirebaseDB, `banners/`));
       bannerToFirestore.id = newDoc.id;
       const setDocResp = await setDoc(newDoc, bannerToFirestore);
-      console.log({ newDoc, setDocResp });
-      console.log(`banner creado con el id: ${bannerToFirestore}`);
+      // console.log({ newDoc, setDocResp });
+      // console.log(`banner creado con el id: ${bannerToFirestore}`);
       dispatch(setActiveBanner(bannerToFirestore));
       dispatch(addNewBanner(bannerToFirestore));
     } else {

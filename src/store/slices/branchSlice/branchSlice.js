@@ -56,7 +56,7 @@ export const branchSlice = createSlice({
             state.messageSaved = `:D`;
           },
           addNewBranch: (state, action) => {
-            console.log('action.payload: ', action.payload);
+            // console.log('action.payload: ', action.payload);
             state.isSaving = false,
             state.branches.push(action.payload);
             state.messageSaved = `:D`;

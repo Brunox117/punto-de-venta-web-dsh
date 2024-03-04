@@ -56,7 +56,7 @@ export const postSlice = createSlice({
       state.messageSaved = `:D`;
     },
     addNewPost: (state, action) => {
-      console.log('action.payload: ', action.payload);
+      // console.log('action.payload: ', action.payload);
       state.isSaving = false,
       state.posts.push(action.payload);
       state.messageSaved = `:D`;

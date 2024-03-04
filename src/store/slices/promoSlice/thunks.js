@@ -40,8 +40,8 @@ export const startSavePromo = () => {
       const newDoc = doc(collection(FirebaseDB, `promos/`));
       promoToFirestore.id = newDoc.id;
       const setDocResp = await setDoc(newDoc, promoToFirestore);
-      console.log({ newDoc, setDocResp });
-      console.log(`promo creado con el id: ${promoToFirestore}`);
+      // console.log({ newDoc, setDocResp });
+      // console.log(`promo creado con el id: ${promoToFirestore}`);
       dispatch(setActivePromo(promoToFirestore));
       dispatch(addNewPromo(promoToFirestore));
     } else {

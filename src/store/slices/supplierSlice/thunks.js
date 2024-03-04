@@ -38,8 +38,8 @@ export const startSaveSupplier = () => {
       const newDoc = doc(collection(FirebaseDB, `suppliers/`));
       supplierToFirestore.id = newDoc.id;
       const setDocResp = await setDoc(newDoc, supplierToFirestore);
-      console.log({ newDoc, setDocResp });
-      console.log(`supplier creada con el id: ${supplierToFirestore.id}`);
+      // console.log({ newDoc, setDocResp });
+      // console.log(`supplier creada con el id: ${supplierToFirestore.id}`);
       dispatch(setActiveSupplier(supplierToFirestore));
       dispatch(addNewSupplier(supplierToFirestore));
     } else {

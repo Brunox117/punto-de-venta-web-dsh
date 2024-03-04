@@ -52,7 +52,7 @@ export const categorySlice = createSlice({
       state.messageSaved = `:D`;
     },
     addNewCategory: (state, action) => {
-      console.log('action.payload: ', action.payload);
+      // console.log('action.payload: ', action.payload);
       state.isSaving = false,
       state.categories.push(action.payload);
       state.messageSaved = `:D`;

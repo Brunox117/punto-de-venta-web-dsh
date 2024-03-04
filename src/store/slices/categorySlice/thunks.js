@@ -38,8 +38,8 @@ export const startSaveCategory = () => {
       const newDoc = doc(collection(FirebaseDB, `categories/`));
       categoryToFirestore.id = newDoc.id;
       const setDocResp = await setDoc(newDoc, categoryToFirestore);
-      console.log({ newDoc, setDocResp });
-      console.log(`category creada con el id: ${categoryToFirestore.id}`);
+      // console.log({ newDoc, setDocResp });
+      // console.log(`category creada con el id: ${categoryToFirestore.id}`);
       dispatch(setActivecategory(categoryToFirestore));
       dispatch(addNewCategory(categoryToFirestore));
     } else {

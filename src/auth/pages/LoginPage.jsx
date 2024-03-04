@@ -16,7 +16,7 @@ export const LoginPage = () => {
   const isAuthenticating = useMemo(() => status === "checking", [status]);
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log({ email, password });
+    // console.log({ email, password });
     dispatch(startLogin({ email, password }));
   };
   return (

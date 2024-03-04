@@ -40,8 +40,8 @@ export const startSaveProduct = () => {
       const newDoc = doc(collection(FirebaseDB, `products/`));
       productToFirestore.id = newDoc.id;
       const setDocResp = await setDoc(newDoc, productToFirestore);
-      console.log({ newDoc, setDocResp });
-      console.log(`producto creado con el id: ${productToFirestore}`);
+      // console.log({ newDoc, setDocResp });
+      // console.log(`producto creado con el id: ${productToFirestore}`);
       dispatch(setActiveProduct(productToFirestore));
       dispatch(addNewProduct(productToFirestore));
     } else {

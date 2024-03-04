@@ -41,8 +41,8 @@ export const startSaveBranch = () => {
       const newDoc = doc(collection(FirebaseDB, `branches/`));
       branchToFirestore.id = newDoc.id;
       const setDocResp = await setDoc(newDoc, branchToFirestore);
-      console.log({ newDoc, setDocResp });
-      console.log(`branch creada con el id: ${branchToFirestore.id}`);
+      // console.log({ newDoc, setDocResp });
+      // console.log(`branch creada con el id: ${branchToFirestore.id}`);
       dispatch(setActiveBranch(branchToFirestore));
       dispatch(addNewBranch(branchToFirestore));
     } else {
