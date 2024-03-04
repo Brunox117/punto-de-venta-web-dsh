@@ -10,17 +10,31 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { startLogout } from "../../store/slices/authSlice/thunks";
 
-const routes = ["productos", "sucursales", "abarrotips", "proveedores", "categorías", "banners", "promociones", 'salir'];
+const routes = [
+  "productos",
+  "sucursales",
+  "abarrotips",
+  "proveedores",
+  "categorías",
+  "banners",
+  "promociones",
+];
 
 export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const dispatch = useDispatch();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+  const handleLogout = () => {
+    dispatch(startLogout());
   };
   return (
     <AppBar position="static">
@@ -80,6 +94,17 @@ export const NavBar = () => {
                   </MenuItem>
                 </Link>
               ))}
+              <Button
+               onClick={handleLogout}
+                sx={{
+                  my: 2,
+                  color: "red",
+                  display: "block",
+                  fontWeight: "bold",
+                }}
+              >
+                Salir
+              </Button>
             </Menu>
           </Box>
           <Typography
@@ -118,6 +143,17 @@ export const NavBar = () => {
                 </Button>
               </Link>
             ))}
+            <Button
+              onClick={handleLogout}
+              sx={{
+                my: 2,
+                color: "red",
+                display: "block",
+                fontWeight: "bold",
+              }}
+            >
+              Salir
+            </Button>
           </Box>
         </Toolbar>
       </Container>

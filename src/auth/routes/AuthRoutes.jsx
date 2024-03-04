@@ -4,7 +4,7 @@ import { LoginPage } from "../pages/LoginPage"
 export const AuthRoutes = () => {
   return (
     <Routes >
-        <Route path='/' element={<LoginPage />} />
+        <Route path='/*' element={<LoginPage />} />
      </Routes>
   )
 }

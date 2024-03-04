@@ -3,7 +3,6 @@ import {
   AbarroTipsView,
   BannersView,
   CategoriasView,
-  LogoutView,
   ProductosView,
   PromocionesView,
   ProveedoresView,
@@ -38,7 +37,6 @@ export const DashboardRoutes = () => {
       <Route path="/categorías" element={<CategoriasView />} />
       <Route path="/banners" element={<BannersView />} />
       <Route path="/promociones" element={<PromocionesView />} />
-      <Route path="/salir" element={<LogoutView />} />
     </Routes>
   );
 };
