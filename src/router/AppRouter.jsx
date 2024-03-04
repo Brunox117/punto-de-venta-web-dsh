@@ -5,7 +5,6 @@ import { AuthRoutes } from "../auth/routes/AuthRoutes";
 
 export const AppRouter = () => {
   const { status } = useCheckAuth();
-  console.log(status);
   return (
     <Routes>
       {status === "authenticated" ? (
