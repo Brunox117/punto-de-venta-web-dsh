@@ -6,10 +6,12 @@ import { supplierSlice } from "./slices/supplierSlice";
 import { postSlice } from "./slices/postSlice/postSlice";
 import { bannerSlice } from "./slices/bannerSlice/bannerSlice";
 import { promoSlice } from "./slices/promoSlice/promoSlice";
+import { authSlice } from "./slices/authSlice/authSlice";
 
 
 export const store = configureStore({
   reducer: {
+    auth: authSlice.reducer,
     product: productSlice.reducer,
     branch: branchSlice.reducer,
     category: categorySlice.reducer,
