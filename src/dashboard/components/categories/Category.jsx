@@ -4,7 +4,7 @@ export const Category = ({ category, onEdit, onDelete }) => {
   const { name, imageUrl } = category;
 
   return (
-    <Grid item xs={6} sm={6} md={6} lg={10} sx={{mt: 4}}>
+    <Grid item xs={11} sm={11} md={11} lg={11} sx={{mt: 4}}>
     <Card sx={{ borderRadius: '8px', boxShadow: 4 }}>
        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <CardMedia

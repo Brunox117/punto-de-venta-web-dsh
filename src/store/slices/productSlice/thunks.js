@@ -23,6 +23,7 @@ export const createNewProduct = () => {
       price: 0,
       imageUrl: "",
       categories: [],
+      discount: "",
       id: "",
     };
     await dispatch(addNewEmptyProduct(newProduct));

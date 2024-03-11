@@ -44,20 +44,29 @@ const formValidations = {
     (value) => value.length > 0,
     "Debes seleccionar al menos una categoría",
   ],
+  discount: [
+    (value) => {
+      // Validar si el valor es un string vacío
+      if (value === "") return true;
+
+      // Validar si el valor es un número entero positivo
+      const parsedValue = parseInt(value, 10);
+      return !isNaN(parsedValue) && parsedValue >= 0 && parsedValue <= 100;
+    },
+    "El descuento debe ser un número entero entre 0 y 100",
+  ],
 };
 
 export const ProductsForm = () => {
   const dispatch = useDispatch();
-  const productCategories = []
+  const productCategories = [];
   //SE OBTIENE LA INFORMACION QUE SE NECESITA DEL STORE
   const { activeProduct, isSaving, messageSaved } = useSelector(
     (state) => state.product
   );
-  const { categories } = useSelector(
-    (state) => state.category
-  );
-  categories.forEach(category => {
-    productCategories.push(category.name)
+  const { categories } = useSelector((state) => state.category);
+  categories.forEach((category) => {
+    productCategories.push(category.name);
   });
   // HOOK USEFORM MANEJA EL FORMULARIO
   const {
@@ -65,6 +74,7 @@ export const ProductsForm = () => {
     price,
     imageUrl,
     id,
+    discount,
     categories: formCategories,
     onInputChange,
     setFormState,
@@ -83,12 +93,13 @@ export const ProductsForm = () => {
       setActiveProduct({
         name,
         price,
+        discount,
         imageUrl,
         categories: selectedCategories,
         id,
       })
     );
-  }, [dispatch, name, price, imageUrl, selectedCategories]);
+  }, [dispatch, name, price, imageUrl, selectedCategories, discount]);
   //SE USA PARA OBTENER LA IMG Y SUBIRLA A A LA DB
   const onFileInputChange = ({ target }) => {
     if (target.files === 0) return;
@@ -155,6 +166,18 @@ export const ProductsForm = () => {
         <UploadButton
           onFileInputChange={onFileInputChange}
           isSaving={isSaving}
+        />
+        <TextField
+          id="outlined-number"
+          label="Agregar descuento (opcional)"
+          type="number"
+          sx={{ border: "none", mb: 1, marginRight: 1 }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          name="discount"
+          value={discount}
+          onChange={onInputChange}
         />
         <FormControl fullWidth sx={{ mt: 1 }}>
           <InputLabel id="categories-label">Categorías</InputLabel>
