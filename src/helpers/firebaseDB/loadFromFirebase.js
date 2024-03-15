@@ -64,3 +64,12 @@ export const loadPromos = async () => {
   });
   return promos;
 };
+export const loadDiscountTitle = async () => {
+  const collectionRef = collection(FirebaseDB, "/discountTitles/");
+  const docs = await getDocs(collectionRef);
+  const discountTitles = [];
+  docs.forEach((discountTitle) => {
+    discountTitles.push({ id: discountTitle.id, ...discountTitle.data() });
+  });
+  return discountTitles[0];
+};

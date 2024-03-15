@@ -16,6 +16,7 @@ import {
   useProducts,
   usePromos,
   useSuppliers,
+  useTitle,
 } from "../../hooks/firebaseDB/getFromFirebaseDB";
 
 export const DashboardRoutes = () => {
@@ -26,6 +27,7 @@ export const DashboardRoutes = () => {
   usePosts();
   useBanners();
   usePromos();
+  useTitle();
   return (
     <Routes>
       <Route path="/" element={<ProductosView />} />

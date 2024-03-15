@@ -7,7 +7,7 @@ import { postSlice } from "./slices/postSlice/postSlice";
 import { bannerSlice } from "./slices/bannerSlice/bannerSlice";
 import { promoSlice } from "./slices/promoSlice/promoSlice";
 import { authSlice } from "./slices/authSlice/authSlice";
-
+import { discountTitleSlice } from "./slices/discountsTitleSlice/discountsTitleSlice";
 
 export const store = configureStore({
   reducer: {
@@ -19,5 +19,6 @@ export const store = configureStore({
     post: postSlice.reducer,
     banner: bannerSlice.reducer,
     promo: promoSlice.reducer,
+    discountTitle: discountTitleSlice.reducer,
   },
 });

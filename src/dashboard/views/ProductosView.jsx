@@ -1,17 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Product } from "../components/products/Product";
 import { ProductsForm } from "../forms/ProductsForm";
-import { CreateBox } from "../components/";
+import { CreateBox, Title } from "../components/";
 import { createNewProduct } from "../../store/slices/productSlice";
 import { Products } from "../components/products/Products";
 import { Alert } from "@mui/material";
 import { useEffect, useState } from "react";
 import { SearchbarWithFilter } from "../components/products";
+import { DiscountTitleForm } from "../forms";
+import { createNewTitle } from "../../store/slices/discountsTitleSlice/thunks";
 
 export const ProductosView = () => {
   const { activeProduct, products: productsFromFirebase } = useSelector(
     (state) => state.product
   );
+  const { activeTitle } = useSelector((state) => state.discountTitle);
   const [searchProduct, setSearchProduct] = useState([]);
   const { categories } = useSelector((state) => state.category);
   const dispatch = useDispatch();
@@ -21,6 +24,9 @@ export const ProductosView = () => {
   }, [productsFromFirebase]);
   const onClick = () => {
     dispatch(createNewProduct());
+  };
+  const onClickTitle = () => {
+    dispatch(createNewTitle());
   };
   const filterProducts = (searchTerm, category) => {
     let filteredProducts = productsFromFirebase;
@@ -53,6 +59,14 @@ export const ProductosView = () => {
       ) : (
         <></>
       )}
+      {!!activeTitle ? (
+        <>
+          <DiscountTitleForm />
+          <Title title={activeTitle.title} subtitle={activeTitle.subtitle} />
+        </>
+      ) : (
+        <CreateBox title="Crear título de descuento" onClick={onClickTitle} />
+      )}
       {!!activeProduct ? (
         <>
           <ProductsForm />
@@ -61,6 +75,7 @@ export const ProductosView = () => {
       ) : (
         <CreateBox title="Crear producto" onClick={onClick} />
       )}
+
       <br />
       <div>
         <SearchbarWithFilter

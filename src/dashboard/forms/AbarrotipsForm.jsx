@@ -1,24 +1,16 @@
 import React, { useEffect } from "react";
 import {
-  Checkbox,
-  FormControl,
   Grid,
-  InputLabel,
-  ListItemText,
-  MenuItem,
-  Select,
   TextField,
 } from "@mui/material";
 import { FormLayout } from "../layout/FormLayout";
-import {
-  AddCircleOutlineOutlined,
-  DeleteOutline,
-  SaveOutlined,
-  UploadOutlined,
-} from "@mui/icons-material";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useForm2 } from "../../hooks/useForm2";
-import { clearMessage, setActivePost } from "../../store/slices/postSlice/postSlice";
+import {
+  clearMessage,
+  setActivePost,
+} from "../../store/slices/postSlice/postSlice";
 import {
   createNewPost,
   startDeletingPost,
@@ -40,11 +32,11 @@ const formValidations = {
   ],
 };
 
-
-
 export const AbarroTipsForm = () => {
   const dispatch = useDispatch();
-  const { activePost, isSaving, messageSaved } = useSelector((state) => state.post);
+  const { activePost, isSaving, messageSaved } = useSelector(
+    (state) => state.post
+  );
 
   // Utilizar el hook useForm para manejar el estado del formulario
   const {
@@ -59,7 +51,6 @@ export const AbarroTipsForm = () => {
     onInputChange,
     setFormState, // Agregar setFormState para actualizar el estado del formulario
   } = useForm2(activePost, formValidations);
-
 
   const onFileInputChange = ({ target }) => {
     if (target.files === 0) return;
